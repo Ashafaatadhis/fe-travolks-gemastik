@@ -6,7 +6,6 @@ import {buttonVariants } from "@/components/ui/button";
 import SigninForm from "@/components/auth/SigninForm";
 
 export default function page() {
- 
   return (
     <>
       <div className="md:hidden">
