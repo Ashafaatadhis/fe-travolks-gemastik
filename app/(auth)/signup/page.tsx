@@ -35,7 +35,7 @@ export default function page() {
           href="/signin"
           className={cn(
             buttonVariants({ variant: "ghost" }),
-            "absolute right-4 top-4 md:right-8 md:top-8"
+            "absolute right-4 top-4 md:right-8 md:top-8 hover:bg-custom-Fennel-Flower bg-custom-Lightish-Blue text-custom-Cloudless hover:text-custom-Flax-Bloom"
           )}
         >
           Signin

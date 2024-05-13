@@ -3,94 +3,118 @@ import * as React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Github, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInput, SchemaInput } from "./Validation";
-
+import { FormInput, SchemaInput } from "@/schema/schema";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { axiosInstance } from "@/helper/axiosInstance";
+import Cookies from 'js-cookie';
 const SignupForm = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm({
+  const form = useForm<z.infer<typeof SchemaInput>>({
     resolver: zodResolver(SchemaInput),
     defaultValues: {
       email: "",
       password: "",
-    }
+    },
   });
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
+    const {email, password} = data;
     try {
-      console.log(data);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      throw new Error("");
+      const res = await axiosInstance.post("/auth/signup", {
+      email,
+      password
+      });
+      console.log(res);
+      const {access_token, ...restData} = res.data;
+      Cookies.set('access_token', access_token);
+      Cookies.set('user', JSON.stringify(restData));
     } catch (error) {
       console.log(error);
-      setError("root", {
-        type: "custom",
-        message: "Email already exists",
-      })
-      
     }
   };
 
   return (
     <div className="grid gap-6">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              {...register("email")}
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    <Label className="sr-only" htmlFor="email">
+                      Email
+                    </Label>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      id="email"
+                      placeholder="name@example.com"
+                      type="email"
+                      autoCapitalize="none"
+                      autoComplete="email"
+                      autoCorrect="off"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-
-            {errors.email && (
-              <h1 className="text-red-400 text-xs">{errors.email?.message}</h1>
-            )}
           </div>
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
-              Password
-            </Label>
-            <Input
-              {...register("password")}
-              id="password"
-              placeholder="*****"
-              type="password"
-              autoCapitalize="none"
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    <Label className="sr-only" htmlFor="password">
+                      Password
+                    </Label>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      id="password"
+                      placeholder="*****"
+                      type="password"
+                      autoCapitalize="none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-
-            {errors.password && (
-              <h1 className="text-red-400 text-xs">
-                {errors.password?.message}
-              </h1>
-            )}
           </div>
-          <Button disabled={isSubmitting} className="bg-custom-Lightish-Blue hover:bg-custom-Fennel-Flower"> {/* Mengubah warna tombol */}
-          {isSubmitting ? (
-              <p className="text-xs flex gap-x-2 items-center">
-                <LoaderCircle className="animate-spin h-4 w-4" />
-                loading...
-              </p>
-            ) : (
-              "Signup"
-            )}
+          <Button className="bg-custom-Lightish-Blue hover:bg-custom-Fennel-Flower">
+           {form.formState.isSubmitting ? (
+            <p className="text-xs flex gap-x-2 items-center">
+              <LoaderCircle className="animate-spin h-4 w-4" />
+              loading...
+            </p>
+           ): (
+            "Signup"
+           )}
           </Button>
         </div>
-      {errors.root && <h1 className="text-red-400 mt-1 ml-2 text-xs">{errors.root?.message}</h1>}
+        
       </form>
-    </div>
+    </Form>
+  </div>
   );
 };
 

@@ -3,100 +3,117 @@ import * as React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, FieldValues } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
-import { FormInput, SchemaInput } from "./Validation";
+import { FormInput, SchemaInput } from "@/schema/schema";
 import { axiosInstance } from "@/helper/axiosInstance";
+import { z } from "zod";
+import Cookies from 'js-cookie';
 
 const SigninForm = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm({
+  const form = useForm<z.infer<typeof SchemaInput>>({
     resolver: zodResolver(SchemaInput),
     defaultValues: {
       email: "",
       password: "",
-    }
+    },
   });
 
-  const onSubmit: SubmitHandler<FormInput> = async () => {
+  const onSubmit: SubmitHandler<FormInput> = async (data: FieldValues) => {
     try {
+      const {email, password} = data;
       const res = await axiosInstance.post("/auth/signin", {
-        email: "zidanindratama@travolks.com",
-        password: "test123",
+        email,
+        password
       });
-      console.log(res.data);
-      
+      console.log(res);
+      const {access_token, ...restData} = res.data;
+      Cookies.set('access_token', access_token);
+      Cookies.set('user', JSON.stringify(restData));
     } catch (error) {
-      setError("root", {
-        type: "custom",
-        message: "Invalid email or password",
-      })
+      console.log(error);
     }
   };
-  
+
   return (
     <div className="grid gap-6">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            {errors.email && (
-              <p className="text-red-400 text-xs">{errors.email?.message}</p>
-            )}
-            <Input
-              {...register("email")}
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-            />
-           
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="grid gap-2">
+            <div className="grid gap-1">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <Label className="sr-only" htmlFor="email">
+                        Email
+                      </Label>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        id="email"
+                        placeholder="name@example.com"
+                        type="email"
+                        autoCapitalize="none"
+                        autoComplete="email"
+                        autoCorrect="off"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid gap-1">
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <Label className="sr-only" htmlFor="password">
+                        Password
+                      </Label>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        id="password"
+                        placeholder="*****"
+                        type="password"
+                        autoCapitalize="none"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button className="bg-custom-Lightish-Blue hover:bg-custom-Fennel-Flower">
+              {form.formState.isSubmitting ? (
+                <p className="text-xs flex gap-x-2 items-center">
+                  <LoaderCircle className="animate-spin h-4 w-4" />
+                  loading...
+                </p>
+              ) : (
+                "Signin"
+              )}
+            </Button>
           </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
-              Password
-            </Label>
-            {errors.password && (
-              <p className="text-red-400 text-xs">
-                {errors.password?.message}
-              </p>
-            )}
-            <Input
-              {...register("password")}
-              id="password"
-              placeholder="*****"
-              type="password"
-              autoCapitalize="none"
-            />
-            
-          </div>
-          <Button className="bg-custom-Lightish-Blue hover:bg-custom-Fennel-Flower">
-            {isSubmitting ? (
-              <p className="text-xs  flex gap-x-2 items-center">
-                <LoaderCircle className="animate-spin h-4 w-4" />
-                loading...
-              </p>
-            ) : (
-              "Signin"
-            )}
-          </Button>
-        </div>
-        {errors.root && (
-          <p className="text-red-400 mt-1 ml-2 text-xs">
-            {errors.root?.message}
-          </p>
-        )}
-      </form>
+        </form>
+      </Form>
     </div>
   );
 };
