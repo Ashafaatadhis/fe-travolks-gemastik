@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,6 +19,23 @@ const config = {
     },
     extend: {
       colors: {
+        "custom-River-Styx": "#18191F",
+        "custom-Asphalt-Blue": "#474A57",
+        "custom-Bright-Manatee": "#969BAB",
+        "custom-BigFish-toFry": "#D9DBE1",
+        "custom-Paper-White": "#EEEFF4",
+        "custom-Grams-Hair": "#F4F5F7",
+        "custom-Lightish-Blue": "#4475F2",
+        "custom-Fennel-Flower": "#789DFC",
+        "custom-Cloudless": "#D9E3FC",
+        "custom-Ultra-Indigo": "#4737FF",
+        "custom-Greyish-Lavender": "#BCB6FD",
+        "custom-Nostalgia-Perfume": "#E1DFF6",
+        "custom-BlueOyster-Cult": "#4F7DF3",
+        "custom-Sky-High": "#A6BBF2",
+        "custom-Flax-Bloom": "#CFD9F5",
+        "custom-Fly-byNight": "#181E4B",
+        "custom-Strong-Iris": "#5E6282",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -75,6 +92,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

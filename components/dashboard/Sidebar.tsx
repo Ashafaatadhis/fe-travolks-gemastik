@@ -14,23 +14,23 @@ const Sidebar = () => {
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
         <Link
           href="#"
-          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base bg-custom-Lightish-Blue"
         >
-          <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-          <span className="sr-only">Acme Inc</span>
+          <Package2 className="h-4 w-4 transition-all text-custom-Cloudless group-hover:scale-110" />
+          <span className="sr-only text-custom-Strong-Iris">Acme Inc</span>
         </Link>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
                 href="#"
-                className="flex h-9 w-9 items-center bg-accent justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                className="flex h-9 w-9 items-center bg-accent justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8 bg-custom-Paper-White"
               >
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
+                <Home className="h-5 w-5 text-custom-Flax-Bloom" />
+                <span className="sr-only text-custom-Strong-Iris">Dashboard</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
+            <TooltipContent side="right" className="text-custom-Strong-Iris">Dashboard</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>
@@ -42,11 +42,11 @@ const Sidebar = () => {
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Settings className="h-5 w-5" />
-                <span className="sr-only">Settings</span>
+                <Settings className="h-5 w-5 text-custom-Fennel-Flower" />
+                <span className="sr-only text-custom-Strong-Iris">Settings</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Settings</TooltipContent>
+            <TooltipContent side="right" className="text-custom-Strong-Iris">Settings</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>

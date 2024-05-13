@@ -52,30 +52,30 @@ const Navbar = () => {
         </SheetContent>
       </Sheet>
       <div>
-        <h1 className="font-bold text-xl">TRAVOLKS!</h1>
+        <h1 className="font-bold text-xl text-custom-Fly-byNight">TRAVOLKS!</h1>
       </div>
       <div className="relative ml-auto flex-1 md:grow-0">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground text-custom-Sky-High" />
         <Input
           type="search"
           placeholder="Search..."
-          className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
+          className="w-full  rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px] text-custom-Fly-byNight placeholder:text-custom-Sky-High"
         />
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback className="bg-custom-Sky-High text-custom-Grams-Hair">CN</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuLabel className="text-custom-Fly-byNight">My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuItem className="text-custom-Fly-byNight">Settings</DropdownMenuItem>
+          <DropdownMenuItem className="text-custom-Fly-byNight">Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem className="text-custom-Strong-Iris">Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
