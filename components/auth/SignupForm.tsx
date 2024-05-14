@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { axiosInstance } from "@/helper/axiosInstance";
+import axiosInstance from "@/helper/axiosInstance";
 import Cookies from 'js-cookie';
 
 const SignupForm = () => {

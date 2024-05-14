@@ -1,17 +1,21 @@
-import React from "react";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/landing/Hero";
-import Partner from "@/components/landing/Partner";
 import Navbar from "@/components/landing/Navbar";
-import CardTesti from "@/components/landing/testimonial/Card";
-import Header from "@/components/landing/testimonial/Header";
+import React from "react";
+import Testimonial from "@/components/landing/testimonial";
+import QuestionsSection from "@/components/landing/questions";
+import Persuation from "@/components/landing/persuation";
 
 const page = () => {
   return (
     <>
-
+      <div className="h-full">
+        <Navbar />
+        <Hero />
+        <Testimonial />
+        <QuestionsSection />
+        <Persuation/>
+      </div>
     </>
   );
 };

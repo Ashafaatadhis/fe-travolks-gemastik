@@ -15,7 +15,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
 import { FormInput, SchemaInput } from "@/schema/schema";
-import { axiosInstance } from "@/helper/axiosInstance";
+import axiosInstance from "@/helper/axiosInstance";
 import { z } from "zod";
 import Cookies from 'js-cookie';
 
