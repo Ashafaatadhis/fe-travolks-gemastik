@@ -6,13 +6,13 @@ import Image from 'next/image';
 
 function Hero() {
     return (
-      <section className="hero inline-flex pl-[120px] gap-20 place-content-end">
+      <section className="hero inline-flex pl-[120px] gap-20 place-content-end text-custom-Fly-byNight">
         <div className="kiri">
           <Badge variant="outline">• Explore the Wonderful Indonesia!</Badge>
           <h1 className="text-7xl font-bold text-cus">
             Liburan & nikmati
             <br />
-            <span className="text-blue-500">tempat baru</span> di
+            <span className="text-custom-Lightish-Blue">tempat baru</span> di
             <br />
             Indonesia
           </h1>
@@ -21,7 +21,7 @@ function Hero() {
             Indonesia dengan mengikuti perkembangan para influencer di sosial
             media ✨
           </p>
-          <Button className="mt-[34px]">Mulai sekarang →</Button>
+          <Button className="mt-[34px] bg-custom-Lightish-Blue">Mulai sekarang →</Button>
         </div>
         <div className="">
           <Image
