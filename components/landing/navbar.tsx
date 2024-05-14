@@ -1,41 +1,32 @@
-"use client"
-import React from "react";
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle
-} from "@/components/ui/navigation-menu";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
+
 import Link from "next/link";
 
-const Navbar = () => {
+import React from "react";
 
-    return (
-        <nav className="inline-flex">
-            <div className="">
-                <h1 className="">Travolks!</h1>
-            </div>
-            <div className="w-96">
-                <Input type="text" placeholder="Cari Apapun di sini..." />
-            </div>
-            <div>
-            <NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem>
-      <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-      <NavigationMenuContent>
-        <NavigationMenuLink>Link</NavigationMenuLink>
-      </NavigationMenuContent>
-    </NavigationMenuItem>
-  </NavigationMenuList>
-</NavigationMenu>
-            </div>
-        </nav>
-    );
-    };
+const Navbar = () => {
+  return (
+    <div className="flex flex-row justify-between items-center">
+      <div>
+        <h1 className="text-custom-Lightish-Blue font-bold text-3xl">
+          Travolks!
+        </h1>
+      </div>
+      <div className="hidden md:flex flex-row items-center justify-between gap-8">
+        <div className="flex flex-row items-center gap-6">
+          <Link href={"#"}>Link 1</Link>
+          <Link href={"#"}>Link 2</Link>
+          <Link href={"#"}>Link 3</Link>
+          <Link href={"#"}>Link 4</Link>
+        </div>
+        <Button className="bg-custom-Lightish-Blue" asChild>
+          <Link href={"/signup"}>Sign up!</Link>
+        </Button>
+      </div>
+      <Menu className="h-6 w-6 block md:hidden" />
+    </div>
+  );
+};
 
 export default Navbar;
