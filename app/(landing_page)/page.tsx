@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Hero from "../../components/landing/hero";
-import Partner from "../../components/landing/partner";
+import Hero from "@/components/landing/Hero"
+import Partner from "@/components/landing/Partner";
 
 const page = () => {
   return (
