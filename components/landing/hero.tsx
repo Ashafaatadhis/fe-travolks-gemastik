@@ -1,39 +1,33 @@
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button'
-import React from 'react'
-import hero from "@/public/hero.png";
-import Image from 'next/image';
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import React from "react";
 
-function Hero() {
-    return (
-      <section className="hero inline-flex pl-[120px] gap-20 place-content-end">
-        <div className="kiri">
-          <Badge variant="outline">• Explore the Wonderful Indonesia!</Badge>
-          <h1 className="text-7xl font-bold text-cus">
-            Liburan & nikmati
-            <br />
-            <span className="text-blue-500">tempat baru</span> di
-            <br />
-            Indonesia
+const Hero = () => {
+  return (
+    <div className="flex flex-col-reverse md:flex-row items-center py-16">
+      <div>
+        <div className="space-y-6">
+          <h1 className="p-2 bg-custom-Lightish-Blue/20 w-fit rounded-full text-sm font-bold text-custom-Lightish-Blue">
+            ✈️ • Explore the wonderful indonesia!
           </h1>
-          <p className="w-[477px] mt-[30px]">
+          <h1 className="text-3xl md:text-6xl font-bold">
+            Liburan & nikmati{" "}
+            <span className="text-custom-Lightish-Blue">tempat baru</span> di
+            indonesia ️🏖️
+          </h1>
+          <p>
             Destinize membuat kamu selalu update terkait tempat liburan baru di
             Indonesia dengan mengikuti perkembangan para influencer di sosial
             media ✨
           </p>
-          <Button className="mt-[34px]">Mulai sekarang →</Button>
         </div>
-        <div className="">
-          <Image
-            src={hero}
-            width={1000}
-            height={1000}
-            alt="hero image"
-            className="w-[600px] h-auto"
-            />
+        <div className="mt-6">
+          <Button className="bg-custom-Lightish-Blue">Mulai sekarang</Button>
         </div>
-      </section>
-    );
-}
+      </div>
+      <Image src={"/hero.png"} width={1000} height={1000} alt="Hero Image" />
+    </div>
+  );
+};
 
-export default Hero
+export default Hero;
