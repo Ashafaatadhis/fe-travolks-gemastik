@@ -4,11 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/landing/Hero"
 import Partner from "@/components/landing/Partner";
+import Navbar from "@/components/landing/Navbar";
 
 const page = () => {
   return (
     <main>
       <div></div>
+      <Navbar/>
       <Hero/>
       <Partner/>
 

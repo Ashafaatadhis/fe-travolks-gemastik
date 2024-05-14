@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import {
     NavigationMenu,
@@ -6,8 +7,10 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
+    navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 const Navbar = () => {
 
@@ -20,16 +23,16 @@ const Navbar = () => {
                 <Input type="text" placeholder="Cari Apapun di sini..." />
             </div>
             <div>
-                <NavigationMenu>
-                    <NavigationMenuList>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <NavigationMenuLink>Link</NavigationMenuLink>
-                                </NavigationMenuContent>
-                        </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
+            <NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink>Link</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
             </div>
         </nav>
     );

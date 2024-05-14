@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { axiosInstance } from "@/helper/axiosInstance";
 import Cookies from 'js-cookie';
+
 const SignupForm = () => {
   const form = useForm<z.infer<typeof SchemaInput>>({
     resolver: zodResolver(SchemaInput),
