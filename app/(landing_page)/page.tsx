@@ -14,7 +14,7 @@ const page = () => {
         <Hero />
         <Testimonial />
         <QuestionsSection />
-        <Persuation/>
+        <Persuation />
       </div>
     </>
   );

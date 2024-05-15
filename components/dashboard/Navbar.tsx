@@ -1,12 +1,6 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +15,31 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Home, Package2, PanelLeft, Search } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
+import axiosInstance from "@/helper/axiosInstance";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const res = await axiosInstance.delete("/auth/logout");
+      if (res.data.statusCode === 200) {
+        Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
+        Cookies.remove("user");
+
+        toast.success("Log out successfully!");
+        router.push("/signin");
+      }
+    } catch (error) {
+      // @ts-ignore
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
       <Sheet>
@@ -66,16 +83,28 @@ const Navbar = () => {
         <DropdownMenuTrigger asChild>
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback className="bg-custom-Sky-High text-custom-Grams-Hair">CN</AvatarFallback>
+            <AvatarFallback className="bg-custom-Sky-High text-custom-Grams-Hair">
+              CN
+            </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
-          <DropdownMenuLabel className="text-custom-Fly-byNight">My Account</DropdownMenuLabel>
+          <DropdownMenuLabel className="text-custom-Fly-byNight">
+            My Account
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-custom-Fly-byNight">Settings</DropdownMenuItem>
-          <DropdownMenuItem className="text-custom-Fly-byNight">Support</DropdownMenuItem>
+          <DropdownMenuItem className="text-custom-Fly-byNight">
+            Settings
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-custom-Fly-byNight">
+            Support
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-custom-Strong-Iris">Logout</DropdownMenuItem>
+          <DropdownMenuItem className="text-custom-Strong-Iris">
+            <h1 onClick={handleLogout} className="w-fit">
+              Logout
+            </h1>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
