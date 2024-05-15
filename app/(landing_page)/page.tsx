@@ -11,13 +11,12 @@ const page = () => {
   return (
     <>
       <div className="h-full">
-        
         <Navbar />
         <Hero />
         <Testimonial />
         <QuestionsSection />
-        <Persuation/>
-        <Footer/>
+        <Persuation />
+        <Footer />
       </div>
     </>
   );

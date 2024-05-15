@@ -9,20 +9,28 @@ const axiosInstance = axios.create({
   },
 });
 
-// Fungsi untuk refresh token
-const refreshToken = async () => {
-  try {
-    const response = await axiosInstance.post("/auth/refresh-token");
-    const newAccessToken = response.data.access_token;
+async function refreshAccessToken() {
+  const refreshToken = Cookies.get("refreshToken");
+  const token = refreshToken?.replace(/"/g, ""); // Removing all occurrences of double quotes
 
-    // Simpan token baru ke dalam cookie
-    Cookies.set("accessToken", newAccessToken);
-    return newAccessToken;
-  } catch (error) {
-    // Tangani error jika refreshToken gagal
-    throw error;
+  if (!token) {
+    throw new Error("No refreshToken found");
   }
-};
+
+  const newAccessToken = await axios.post(
+    `https://nestjs-03-travolks.vercel.ap/auth/refresh-token`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    }
+  );
+
+  Cookies.set("accessToken", newAccessToken.data.access_token);
+  return newAccessToken.data.access_token;
+}
 
 // Intercept request dan set Authorization header dengan bearer token
 axiosInstance.interceptors.request.use(
@@ -48,10 +56,11 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      try {
-        const accessToken = await refreshToken();
 
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      try {
+        const newAccessToken = await refreshAccessToken();
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (error) {
         // Tangani error jika refreshToken gagal
