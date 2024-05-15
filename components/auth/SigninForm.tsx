@@ -17,30 +17,40 @@ import { LoaderCircle } from "lucide-react";
 import { FormInput, SchemaInput } from "@/schema/schema";
 import axiosInstance from "@/helper/axiosInstance";
 import { z } from "zod";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SigninForm = () => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof SchemaInput>>({
     resolver: zodResolver(SchemaInput),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "zidanindratama@travolks.com",
+      password: "test123",
     },
   });
 
   const onSubmit: SubmitHandler<FormInput> = async (data: FieldValues) => {
     try {
-      const {email, password} = data;
+      const { email, password } = data;
       const res = await axiosInstance.post("/auth/signin", {
         email,
-        password
+        password,
       });
-      console.log(res);
-      const {access_token, ...restData} = res.data;
-      Cookies.set('access_token', access_token);
-      Cookies.set('user', JSON.stringify(restData));
+      console.log(res.data);
+
+      const { access_token, refresh_token, ...restData } = res.data;
+      Cookies.set("accessToken", access_token);
+      Cookies.set("refreshToken", refresh_token);
+      Cookies.set("user", JSON.stringify(restData));
+
+      router.push("/dashboard");
+      toast.success("Welcome back to Travolks!");
     } catch (error) {
-      console.log(error);
+      // @ts-ignore
+      toast.error(error.response.data.message);
     }
   };
 
