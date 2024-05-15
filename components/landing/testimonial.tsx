@@ -5,14 +5,15 @@ import { Star } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
+  CardFooter,
+  CardTitle,
 } from "@/components/ui/card";
 import { dataTesti } from "@/constant/data";
 
 export default function Testimonial() {
   return (
-    <div className="card testi flex flex-col items-center justify-around gap-y-6 ">
+    <section className="card testi flex flex-col items-center justify-around gap-y-6 ">
       <div className="flex flex-col items-center text-center gap-y-4">
         <p className=" text-xs md:text-xl font-sans text-custom-Ultra-Indigo font-bold">
           TESTIMONIAL DESTINIZE
@@ -35,17 +36,17 @@ export default function Testimonial() {
                 key={review}
                 className="min-w-0 max-w-xs h-[500px] border rounded-lg flex flex-col justify-center items-center shadow-xl px-2 m-2">
                 <CardHeader>
-                  
+                  <CardTitle>
                     <div>
                       <Image
                         className="w-56 rounded-full"
                         src={img}
-                       alt={reviewer}
+                        alt={reviewer}
                       />
                     </div>
-                  
+                  </CardTitle>
                 </CardHeader>
-                <CardDescription className="flex flex-col gap-y-4 mx-2 items-center text-center">
+                <CardContent className="flex flex-col gap-y-4 mx-2 items-center text-center">
                   <p className="text-custom-Asphalt-Blue text-base  ">
                     {review}
                   </p>
@@ -58,13 +59,15 @@ export default function Testimonial() {
                   <p className="font-semibold  text-custom-Lightish-Blue">
                     {reviewer}
                   </p>
+                </CardContent>
+                <CardFooter>
                   <p className="font-bold text-custom-River-Styx">{job}</p>
-                </CardDescription>
+                </CardFooter>
               </Card>
             </>
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

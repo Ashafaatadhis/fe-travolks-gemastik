@@ -8,9 +8,10 @@ import { ChevronRight } from "lucide-react";
 import { dataQuestion } from "@/constant/data";
 import { Button } from "@/components/ui/button";
 
+
 export default function QuestionsSection() {
   return (
-    <div className="flex flex-col gap-y-5 mt-10 ">
+    <section className="flex flex-col gap-y-5 mt-10 ">
       <div className="header flex  items-center flex-wrap gap-2 justify-between">
         <div className="flex flex-col gap-3">
           <p className="text-sm md:text-xl font-bold text-custom-Ultra-Indigo">
@@ -33,7 +34,7 @@ export default function QuestionsSection() {
       <Accordion
         type="single"
         collapsible
-        className="border px-2 rounded shadow-xl">
+        className="border px-2 rounded ">
         {dataQuestion.map((data, index) => {
           const { question, answer } = data;
           return (
@@ -41,13 +42,13 @@ export default function QuestionsSection() {
               <AccordionTrigger className="active:">
                 {question}
               </AccordionTrigger>
-              <AccordionContent className="text-custom-Asphalt-Blue bg-gray-400/10 p-1">
+              <AccordionContent className="text-custom-Asphalt-Blue  p-1">
                 {answer}.
               </AccordionContent>
             </AccordionItem>
           );
         })}
       </Accordion>
-    </div>
+    </section>
   );
 }
