@@ -39,7 +39,7 @@ export default function Testimonial() {
                   <CardTitle>
                     <div>
                       <Image
-                        className="w-56 rounded-full"
+                        className="w-56 rounded-full aspect-square"
                         src={img}
                         alt={reviewer}
                       />

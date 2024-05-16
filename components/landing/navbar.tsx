@@ -13,7 +13,7 @@ const Navbar = () => {
           Travolks!
         </h1>
       </div>
-       
+
       <div className="hidden md:flex flex-row items-center justify-between gap-8">
         <div className="flex flex-row items-center gap-6">
           <Link href={"#"}>Link 1</Link>
