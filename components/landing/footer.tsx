@@ -2,7 +2,7 @@ import { Earth, PhoneCall, Locate, Printer, MailCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 export default function Footer() {
   return (
-    <footer className="my-4 px-3 h-[600px] flex items-end">
+    <footer className="my-10 ">
       <div className="flex flex-col justify-around h-96">
         <section className="flex flex-wrap justify-between ">
           <div className="desc-detail-container w-full md:w-2/5">

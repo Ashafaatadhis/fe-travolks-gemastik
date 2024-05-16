@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export default function QuestionsSection() {
   return (
-    <section className="flex flex-col gap-y-5 mt-10 ">
+    <section className="flex flex-col gap-y-5 my-10 ">
       <div className="header flex  items-center flex-wrap gap-2 justify-between">
         <div className="flex flex-col gap-3">
           <p className="text-sm md:text-xl font-bold text-custom-Ultra-Indigo">
@@ -34,7 +34,7 @@ export default function QuestionsSection() {
       <Accordion
         type="single"
         collapsible
-        className="border px-2 rounded ">
+        className="px-2 rounded ">
         {dataQuestion.map((data, index) => {
           const { question, answer } = data;
           return (

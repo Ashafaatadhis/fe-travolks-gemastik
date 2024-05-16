@@ -34,12 +34,12 @@ export default function Testimonial() {
             <>
               <Card
                 key={review}
-                className="min-w-0 max-w-xs h-[500px] border rounded-lg flex flex-col justify-center items-center shadow-xl px-2 m-2">
+                className="min-w-0 max-w-xs h-[480px] border rounded-lg flex flex-col justify-center items-center shadow-sm px-2 m-2">
                 <CardHeader>
                   <CardTitle>
                     <div>
                       <Image
-                        className="w-56 rounded-full aspect-square"
+                        className="w-44 rounded-full aspect-square"
                         src={img}
                         alt={reviewer}
                       />
