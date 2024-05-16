@@ -13,7 +13,7 @@ import { dataTesti } from "@/constant/data";
 
 export default function Testimonial() {
   return (
-    <section className="card testi flex flex-col items-center justify-around gap-y-6 ">
+    <section className="flex flex-col items-center justify-around gap-y-6 py-16">
       <div className="flex flex-col items-center text-center gap-y-4">
         <p className=" text-xs md:text-xl font-sans text-custom-Ultra-Indigo font-bold">
           TESTIMONIAL DESTINIZE
@@ -27,19 +27,17 @@ export default function Testimonial() {
           cek dibawah!
         </p>
       </div>
-      <div className="flex gap-5 flex-wrap justify-around items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
         {dataTesti.map((data) => {
           const { img, review, reviewer, job } = data;
           return (
             <>
-              <Card
-                key={review}
-                className="min-w-0 max-w-xs h-[480px] border rounded-lg flex flex-col justify-center items-center shadow-sm px-2 m-2">
+              <Card key={review}>
                 <CardHeader>
                   <CardTitle>
                     <div>
                       <Image
-                        className="w-44 rounded-full aspect-square"
+                        className="w-44 rounded-full aspect-square mx-auto"
                         src={img}
                         alt={reviewer}
                       />
@@ -55,13 +53,16 @@ export default function Testimonial() {
                     <Star className="text-orange-500" />
                     <Star className="text-orange-500" />
                     <Star className="text-orange-500" />
+                    <Star className="text-orange-500" />
                   </div>
                   <p className="font-semibold  text-custom-Lightish-Blue">
                     {reviewer}
                   </p>
                 </CardContent>
                 <CardFooter>
-                  <p className="font-bold text-custom-River-Styx">{job}</p>
+                  <p className="font-bold text-custom-River-Styx mx-auto">
+                    {job}
+                  </p>
                 </CardFooter>
               </Card>
             </>

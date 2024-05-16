@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 
-
-
 const Hero = () => {
   return (
     <div className="flex flex-col-reverse md:flex-row items-center py-16">
