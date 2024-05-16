@@ -7,13 +7,13 @@ const Reservation = () => {
     <section className="flex items-center flex-col-reverse md:flex-row">
       <div>
         <div className="min-w-0">
-          <p className="text-xs md:text-xl font-sans text-custom-Ultra-Indigo font-bold">
+          <p className="text-xs text-center md:text-xl md:text-left font-sans text-custom-Ultra-Indigo font-bold">
             RESERVASI TEMPAT
           </p>
         </div>
 
         <div className="kiri m-auto ">
-          <h1 className="font-bold text-3xl md:text-6xl w-fit">
+          <h1 className="font-bold text-center md:text-left text-3xl md:text-6xl w-fit">
             Gak mau ngantri?reservasi aja 🤙🏻
           </h1>
 
