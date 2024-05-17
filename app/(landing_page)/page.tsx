@@ -16,8 +16,8 @@ const page = () => {
       <div className="h-full">
         <Navbar />
         <Hero />
-        <Destination/>
         <Partner />
+        <Destination/>
         <Reservation/>
         <Testimonial />
         <QuestionsSection />
