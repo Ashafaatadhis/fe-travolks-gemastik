@@ -8,17 +8,16 @@ import { ChevronRight } from "lucide-react";
 import { dataQuestion } from "@/constant/data";
 import { Button } from "@/components/ui/button";
 
-
 export default function QuestionsSection() {
   return (
-    <section className="flex flex-col gap-y-5 my-10 ">
+    <section className="flex flex-col gap-y-5 py-16">
       <div className="header flex  items-center flex-wrap gap-2 justify-between">
         <div className="flex flex-col gap-3">
           <p className="text-sm md:text-xl font-bold text-custom-Ultra-Indigo">
             FREQUENTLY ASKED QUESTION
           </p>
-          <h1 className="text-xl sm:text-4xl font-bold">
-            🧐.Pertanyaan yang Sering Ditanyakan
+          <h1 className="text-2xl md:text-5xl font-bold">
+            🧐Pertanyaan yang Sering Ditanyakan
           </h1>
         </div>
         <div className="flex items-center sm:w-1/3 w-full justify-end">
@@ -31,10 +30,7 @@ export default function QuestionsSection() {
         </div>
       </div>
 
-      <Accordion
-        type="single"
-        collapsible
-        className="px-2 rounded ">
+      <Accordion type="single" collapsible className="px-2 rounded ">
         {dataQuestion.map((data, index) => {
           const { question, answer } = data;
           return (

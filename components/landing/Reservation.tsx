@@ -13,8 +13,8 @@ const Reservation = () => {
         </div>
 
         <div className="kiri m-auto ">
-          <h1 className="font-bold text-center md:text-left text-3xl md:text-6xl w-fit">
-            Gak mau ngantri?reservasi aja 🤙🏻
+          <h1 className="font-bold text-center md:text-left text-2xl md:text-5xl w-fit">
+            Gak mau ngantri? reservasi aja 🤙🏻
           </h1>
 
           <div className="flex flex-col gap-10 my-10 max-w-md">
