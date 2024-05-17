@@ -8,6 +8,7 @@ import Persuation from "@/components/landing/persuation";
 import Footer from "@/components/landing/Footer";
 import Partner from "@/components/landing/Partners";
 import Reservation from "@/components/landing/Reservation";
+import { Destination } from "@/components/landing/destination";
 
 const page = () => {
   return (
@@ -15,6 +16,7 @@ const page = () => {
       <div className="h-full">
         <Navbar />
         <Hero />
+        <Destination/>
         <Partner />
         <Reservation/>
         <Testimonial />
