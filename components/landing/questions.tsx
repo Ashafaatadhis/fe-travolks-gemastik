@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 export default function QuestionsSection() {
   return (
     <section className="flex flex-col gap-y-5 py-16">
-      <div className="header flex  items-center flex-wrap gap-2 justify-between">
+      <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex flex-col gap-3">
           <p className="text-sm md:text-xl font-bold text-custom-Ultra-Indigo">
             FREQUENTLY ASKED QUESTION
