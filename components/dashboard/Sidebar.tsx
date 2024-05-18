@@ -5,7 +5,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
-import { Home, Package2, Settings } from "lucide-react";
+import { Blocks, Home, Package2, Settings } from "lucide-react";
 import React from "react";
 
 const Sidebar = () => {
@@ -23,14 +23,30 @@ const Sidebar = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/dashboard"
                 className="flex h-9 w-9 items-center bg-accent justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8 bg-custom-Paper-White"
               >
-                <Home className="h-5 w-5 text-custom-Flax-Bloom" />
-                <span className="sr-only text-custom-Strong-Iris">Dashboard</span>
+                <Home className="h-5 w-5" />
+                <span className="sr-only">Dashboard</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right" className="text-custom-Strong-Iris">Dashboard</TooltipContent>
+            <TooltipContent side="right" className="text-custom-Strong-Iris">
+              Dashboard
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/dashboard/categories"
+                className="flex h-9 w-9 items-center bg-accent justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8 bg-custom-Paper-White"
+              >
+                <Blocks className="h-5 w-5" />
+                <span className="sr-only">Categories</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right" className="text-custom-Strong-Iris">
+              Categories
+            </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>
@@ -43,10 +59,14 @@ const Sidebar = () => {
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Settings className="h-5 w-5 text-custom-Fennel-Flower" />
-                <span className="sr-only text-custom-Strong-Iris">Settings</span>
+                <span className="sr-only text-custom-Strong-Iris">
+                  Settings
+                </span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right" className="text-custom-Strong-Iris">Settings</TooltipContent>
+            <TooltipContent side="right" className="text-custom-Strong-Iris">
+              Settings
+            </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>

@@ -28,7 +28,6 @@ const Navbar = () => {
       const res = await axiosInstance.delete("/auth/logout");
       if (res.data.statusCode === 200) {
         Cookies.remove("accessToken");
-        Cookies.remove("refreshToken");
         Cookies.remove("user");
 
         toast.success("Log out successfully!");

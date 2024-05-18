@@ -39,9 +39,8 @@ const SignupForm = () => {
         email,
         password,
       });
-      const { access_token, refresh_token, ...restData } = res.data;
+      const { access_token, ...restData } = res.data;
       Cookies.set("accessToken", access_token);
-      Cookies.set("refreshToken", refresh_token);
       Cookies.set("user", JSON.stringify(restData));
 
       router.push("/dashboard");
