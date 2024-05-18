@@ -1,14 +1,18 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+const DEV_URL = "http://localhost:3100";
+const PROD_URL = "https://nestjs-03-travolks.vercel.app";
+
 const axiosInstance = axios.create({
-  baseURL: "https://nestjs-03-travolks.vercel.app",
+  baseURL: PROD_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
 
+// Refresh token from client's cookie
 async function refreshAccessToken() {
   const refreshToken = Cookies.get("refreshToken");
   const token = refreshToken?.replace(/"/g, ""); // Removing all occurrences of double quotes
@@ -18,7 +22,7 @@ async function refreshAccessToken() {
   }
 
   const newAccessToken = await axios.post(
-    `https://nestjs-03-travolks.vercel.ap/auth/refresh-token`,
+    `${PROD_URL}/auth/refresh-token`,
     null,
     {
       headers: {
@@ -31,6 +35,21 @@ async function refreshAccessToken() {
   Cookies.set("accessToken", newAccessToken.data.access_token);
   return newAccessToken.data.access_token;
 }
+
+// Refreshtoken from server's cookie
+const refreshAuthToken = async () => {
+  try {
+    const response = await axios.post(`${PROD_URL}/auth/refresh-token`, null, {
+      withCredentials: true,
+    });
+    const newAccessToken = response.data.access_token;
+
+    Cookies.set("accessToken", newAccessToken);
+    return newAccessToken;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // Intercept request dan set Authorization header dengan bearer token
 axiosInstance.interceptors.request.use(
@@ -58,12 +77,11 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const newAccessToken = await refreshAccessToken();
+        const newAccessToken = await refreshAuthToken();
 
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (error) {
-        // Tangani error jika refreshToken gagal
         return Promise.reject(error);
       }
     }
