@@ -78,7 +78,7 @@ const UpdateFormUser = () => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
             <CardHeader>
-              <CardTitle>Update Profile</CardTitle>
+              <CardTitle>User Type</CardTitle>
               <CardDescription>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               </CardDescription>
