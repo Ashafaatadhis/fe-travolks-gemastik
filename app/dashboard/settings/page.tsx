@@ -1,4 +1,5 @@
 import UpdateFormProfileSettings from "@/components/settings/UpdateFormProfileSettings";
+import UpdateFormUser from "@/components/settings/UpdateFormUser";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -23,7 +24,10 @@ const page = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <UpdateFormProfileSettings />
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <UpdateFormProfileSettings />
+        <UpdateFormUser />
+      </div>
     </div>
   );
 };
