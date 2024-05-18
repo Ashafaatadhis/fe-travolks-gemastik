@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
 
   const authRoutes = ["/signup", "/signin"];
 
-  const baseRoutes = ["/dashboard"];
+  const baseRoutes = ["/dashboard", "/dashboard/settings"];
 
   const commonAdminAndToutGuideRoutes = ["/test/commonAdminAndToutGuideRoutes"];
 

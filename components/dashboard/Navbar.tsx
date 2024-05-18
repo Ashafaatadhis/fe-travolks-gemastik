@@ -19,9 +19,17 @@ import toast from "react-hot-toast";
 import axiosInstance from "@/helper/axiosInstance";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import retreiveUserDataFromCookie from "@/helper/retriveUserDataFromCookie";
+import { useFetchData } from "@/hooks/useFetchData";
 
 const Navbar = () => {
   const router = useRouter();
+  const userDataFromCookie = retreiveUserDataFromCookie();
+
+  const { data: userProfileData, isLoading } = useFetchData({
+    queryKey: ["userProfileData"],
+    dataProtected: `profile/user/${userDataFromCookie.sub}`,
+  });
 
   const handleLogout = async () => {
     try {
@@ -79,22 +87,18 @@ const Navbar = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={userProfileData?.data.image} />
             <AvatarFallback className="bg-custom-Sky-High text-custom-Grams-Hair">
-              CN
+              TRV
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuLabel className="text-custom-Fly-byNight">
-            My Account
+            {userProfileData?.data.fullname}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <Link href={"/dashboard/settings"} >
-            <DropdownMenuItem className="text-custom-Fly-byNight cursor-pointer">
-              Settings
-            </DropdownMenuItem>
-          </Link>
+
           <DropdownMenuItem className="text-custom-Fly-byNight">
             Support
           </DropdownMenuItem>

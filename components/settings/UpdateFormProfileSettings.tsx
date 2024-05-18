@@ -1,7 +1,19 @@
 "use client";
-import React from "react";
+
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import retreiveUserDataFromCookie from "@/helper/retriveUserDataFromCookie";
 import { useFetchData } from "@/hooks/useFetchData";
+import { useUpdateData } from "@/hooks/useUpdateData";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,21 +22,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { FieldValues, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useUpdateData } from "@/hooks/useUpdateData";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { LoaderCircleIcon } from "lucide-react";
-
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -32,123 +31,163 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import React from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
+
+enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+}
 
 const formSchema = z.object({
-  name: z.string().nonempty("Name is required"),
-  // email: z.string().email("Invalid email address"),
-  role: z.enum(["ADMINISTRATOR", "TOUR_GUIDE", "CUSTOMER"], "Invalid role"),
-  // Add other fields here as needed
+  fullname: z.string(),
+  gender: z.nativeEnum(Gender),
+  address: z.string(),
+  phoneNumber: z.string(),
+  image: z.any().optional(),
+
 });
 
 const UpdateFormProfileSettings = () => {
   const userDataFromCookie = retreiveUserDataFromCookie();
-  const { data: userData, isLoading } = useFetchData({
-    queryKey: ["userData"],
-    dataProtected: `users/${userDataFromCookie.sub}`,
-  });
-  
-  const preLoadValues = {
-    name: userData?.data.name,
-    email: userData?.data.email,
-    role: userData?.data.role,
-    // Add other preloaded values here
-  };
 
-  const mutationUpdateUser = useUpdateData({
-    queryKey: "userData",
-    dataProtected: `users/${userDataFromCookie.sub}`,
-    backUrl: "/dashboard/settings",
+  const { data: userProfileData, isLoading } = useFetchData({
+    queryKey: ["userProfileData"],
+    dataProtected: `profile/user/${userDataFromCookie.sub}`,
   });
+
+  const preLoadValues = {
+    fullname: userProfileData?.data.fullname,
+    gender: userProfileData?.data.gender,
+    address: userProfileData?.data.address,
+    phoneNumber: userProfileData?.data.phoneNumber,
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: preLoadValues,
+    values: preLoadValues || [],
+  });
+
+  const imageRef = form.register("image");
+
+  const mutationUpdateProfile = useUpdateData({
+    queryKey: "userProfileData",
+    dataProtected: `profile/user/${userDataFromCookie.sub}`,
   });
 
   const onSubmit = async (data: FieldValues) => {
-    mutationUpdateUser.mutate(data);
+    const form = new FormData();
+
+    form.append("fullname", data.fullname);
+    form.append("address", data.address);
+    form.append("phoneNumber", data.phoneNumber);
+    form.append("gender", data.gender);
+
+    if (data.image[0] !== undefined) {
+      form.append("image", data.image[0]);
+    }
+
+    mutationUpdateProfile.mutate(form);
   };
 
   return (
-    <>
-      <div className="flex justify-between flex-wrap">
-        <div className="w-2/5">
-          {isLoading ? (
-            <div className="flex gap-1 items-center">
-              <LoaderCircleIcon className="animate-spin w-5 h-5" />
-              <p>Loading...</p>
-            </div>
-          ) : (
-            <Form {...form}>
-              <form className="mt-3" onSubmit={form.handleSubmit(onSubmit)}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Update Profile Settings</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input disabled placeholder="Email" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="role"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Role</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select your Role" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="ADMINISTRATOR">Admin</SelectItem>
-                              <SelectItem value="TOUR_GUIDE">Tour Guide</SelectItem>
-                              <SelectItem value="CUSTOMER">Customer</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    {/* Add other form fields as needed */}
-                  </CardContent>
-                  <CardFooter className="flex justify-end">
-                    <Button type="submit">Update</Button>
-                  </CardFooter>
-                </Card>
-              </form>
-            </Form>
-          )}
-        </div>
-      </div>
-    </>
+    <div className="md:col-span-2">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <Card>
+            <CardHeader>
+              <CardTitle>Update Profile</CardTitle>
+              <CardDescription>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-6">
+              <FormField
+                control={form.control}
+                name="fullname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Fullname</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Fullname" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a verified gender to display" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="MALE">Male</SelectItem>
+                        <SelectItem value="FEMALE">Female</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="phoneNumber" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Image</FormLabel>
+                    <FormControl>
+                      <Input type="file" placeholder="Image" {...imageRef} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell us a little bit about yourself"
+                        className="resize-none"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+            <CardFooter>
+              <Button type="submit">Save changes</Button>
+            </CardFooter>
+          </Card>
+        </form>
+      </Form>
+    </div>
   );
 };
 
