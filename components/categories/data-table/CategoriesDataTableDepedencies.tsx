@@ -47,8 +47,7 @@ export const categoryColumn: ColumnDef<Category>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
           Name
           <ChevronsUpDown className="ml-2 h-4 w-4" />
         </Button>
@@ -62,8 +61,7 @@ export const categoryColumn: ColumnDef<Category>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
           Slug
           <ChevronsUpDown className="ml-2 h-4 w-4" />
         </Button>
@@ -88,16 +86,13 @@ export const categoryColumn: ColumnDef<Category>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(category.slug)}
-            >
+              onClick={() => navigator.clipboard.writeText(category.slug)}>
               Copy category&apos;s slug
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={`/dashboard/categories/${category.slug}`}>
-                View category
-              </Link>
-            </DropdownMenuItem>
+            <Link href={`/dashboard/categories/${category.slug}`}>
+              <DropdownMenuItem>View category</DropdownMenuItem>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
       );

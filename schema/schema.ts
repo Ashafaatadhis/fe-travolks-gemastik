@@ -11,3 +11,33 @@ export const SchemaInput = z.object({
 
 export type FormInput = z.infer<typeof SchemaInput>;
 
+
+enum Roles {
+  ADMINISTRATOR = "ADMINISTRATOR",
+  TOUR_GUIDE = "TOUR_GUIDE",
+  CUSTOMER = "CUSTOMER",
+}
+
+enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+}
+
+const profileSchema =z.object({
+  id: z.string(),
+  gender: z.nativeEnum(Gender),
+  fullname: z.string(),
+  address: z.string(),
+  phoneNumber: z.string(),
+  image: z.any().optional(),
+  userId: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+})
+
+export const usersSchema = z.object({
+  id: z.string(),
+  email: z.string().email(),
+  role: z.nativeEnum(Roles),
+  profile: profileSchema,
+});

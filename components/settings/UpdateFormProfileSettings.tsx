@@ -46,7 +46,6 @@ const formSchema = z.object({
   address: z.string(),
   phoneNumber: z.string(),
   image: z.any().optional(),
-
 });
 
 const UpdateFormProfileSettings = () => {
@@ -78,7 +77,6 @@ const UpdateFormProfileSettings = () => {
 
   const onSubmit = async (data: FieldValues) => {
     const form = new FormData();
-
     form.append("fullname", data.fullname);
     form.append("address", data.address);
     form.append("phoneNumber", data.phoneNumber);
