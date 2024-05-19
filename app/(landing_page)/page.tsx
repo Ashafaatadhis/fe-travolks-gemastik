@@ -5,7 +5,7 @@ import React from "react";
 import Testimonial from "@/components/landing/testimonial";
 import QuestionsSection from "@/components/landing/questions";
 import Persuation from "@/components/landing/persuation";
-import Footer from "@/components/landing/Footer";
+import  Footer  from "@/components/landing/footer";
 import Partner from "@/components/landing/Partners";
 import Reservation from "@/components/landing/Reservation";
 import { Destination } from "@/components/landing/destination";
