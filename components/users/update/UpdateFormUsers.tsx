@@ -56,7 +56,7 @@ const UpdateFormUsers = ({ id }: any) => {
 
   const form = useForm<z.infer<typeof usersSchema>>({
     resolver: zodResolver(usersSchema),
-    values: preLoadValues || [],
+    defaultValues: preLoadValues || [],
   });
 
   const mutationUpdateCategory = useUpdateData({
