@@ -54,12 +54,12 @@ export const Destination = () => {
       </div>
       <div className="flex justify-between mt-3 flex-col sm:flex-row items-center flex-wrap gap-3">
         {card.map((content) => {
-          const { img, place, origin, id } = content;
+          const { img, place, origin,} = content;
           return (
             <>
               <Link href={"/"}>
                 <div
-                  key={id}
+                  key={place}
                   className="rounded-lg shadow-md bg-slate-400 w-[278.46px] h-[392.36px]  overflow-hidden">
                   <div className="rounded relative">
                     <Image

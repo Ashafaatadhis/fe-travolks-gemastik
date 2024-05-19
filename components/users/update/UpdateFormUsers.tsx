@@ -51,8 +51,6 @@ const UpdateFormUsers = ({ id }: any) => {
       address: userData?.data.profile.address,
       phoneNumber: userData?.data.profile.phoneNumber,
       image: userData?.data.profile.image,
-      createdAt: userData?.data.profile.createdAt,
-      updatedAt: userData?.data.profile.updatedAt,
     },
   };
 
@@ -77,8 +75,6 @@ const UpdateFormUsers = ({ id }: any) => {
     form.append("profile.address", data.profile.address);
     form.append("profile.phoneNumber", data.profile.phoneNumber);
     form.append("profile.gender", data.profile.gender);
-    form.append("profile.createdAt", data.profile.createdAt);
-    form.append("profile.updatedAt", data.profile.updatedAt);
 
     if (data.profile.image[0] !== undefined) {
       form.append("profile.image", data.profile.image[0]);
