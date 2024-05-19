@@ -60,15 +60,13 @@ const Navbar = () => {
           <nav className="grid gap-6 text-lg font-medium">
             <Link
               href="#"
-              className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-            >
+              className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base">
               <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
               <span className="sr-only">Acme Inc</span>
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-4 px-2.5 text-foreground hover:text-foreground"
-            >
+              className="flex items-center gap-4 px-2.5 text-foreground hover:text-foreground">
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
@@ -100,9 +98,7 @@ const Navbar = () => {
             {userProfileData?.data.fullname}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-custom-Fly-byNight" asChild>
-            <Link href={"/dashboard/settings"}>Settings</Link>
-          </DropdownMenuItem>
+
           <DropdownMenuItem className="text-custom-Fly-byNight">
             Support
           </DropdownMenuItem>

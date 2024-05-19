@@ -9,6 +9,7 @@ import Footer from "@/components/landing/Footer";
 import Partner from "@/components/landing/Partners";
 import Reservation from "@/components/landing/Reservation";
 import { Destination } from "@/components/landing/destination";
+import { Tourist } from "@/components/landing/tourist";
 
 const page = () => {
   return (
@@ -18,6 +19,7 @@ const page = () => {
         <Hero />
         <Partner />
         <Destination/>
+        <Tourist/>
         <Reservation/>
         <Testimonial />
         <QuestionsSection />

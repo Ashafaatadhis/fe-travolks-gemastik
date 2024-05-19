@@ -1,5 +1,6 @@
 "use client";
 
+
 import {
   Card,
   CardContent,
@@ -76,7 +77,6 @@ const UpdateFormProfileSettings = () => {
 
   const onSubmit = async (data: FieldValues) => {
     const form = new FormData();
-
     form.append("fullname", data.fullname);
     form.append("address", data.address);
     form.append("phoneNumber", data.phoneNumber);
