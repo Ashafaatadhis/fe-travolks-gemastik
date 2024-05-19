@@ -23,7 +23,7 @@ enum Gender {
   FEMALE = "FEMALE",
 }
 
-const profileSchema =z.object({
+export const profileSchema =z.object({
   id: z.string(),
   gender: z.nativeEnum(Gender),
   fullname: z.string(),

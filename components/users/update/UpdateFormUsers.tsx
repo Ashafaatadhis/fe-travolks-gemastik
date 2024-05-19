@@ -34,6 +34,7 @@ import {
 import { z } from "zod";
 import { usersSchema } from "@/schema/schema";
 import { Textarea } from "@/components/ui/textarea";
+import { LoaderCircleIcon } from "lucide-react";
 
 const UpdateFormUsers = ({ id }: any) => {
   const { data: userData, isLoading } = useFetchData({
@@ -45,13 +46,6 @@ const UpdateFormUsers = ({ id }: any) => {
     id: userData?.data.id,
     email: userData?.data.email,
     role: userData?.data.role,
-    profile: {
-      gender: userData?.data.profile.gender,
-      fullname: userData?.data.profile.fullname,
-      address: userData?.data.profile.address,
-      phoneNumber: userData?.data.profile.phoneNumber,
-      image: userData?.data.profile.image,
-    },
   };
 
   const form = useForm<z.infer<typeof usersSchema>>({
@@ -65,20 +59,7 @@ const UpdateFormUsers = ({ id }: any) => {
     backUrl: "/dashboard/users",
   });
 
-  const imageRef = form.register("profile.image");
-
   const onSubmit = async (data: FieldValues) => {
-    const form = new FormData();
-    form.append("email", data.email);
-    form.append("role", data.role);
-    form.append("profile.fullname", data.profile.fullname);
-    form.append("profile.address", data.profile.address);
-    form.append("profile.phoneNumber", data.profile.phoneNumber);
-    form.append("profile.gender", data.profile.gender);
-
-    if (data.profile.image[0] !== undefined) {
-      form.append("profile.image", data.profile.image[0]);
-    }
     mutationUpdateCategory.mutate(data);
   };
 
@@ -110,20 +91,6 @@ const UpdateFormUsers = ({ id }: any) => {
 
               <FormField
                 control={form.control}
-                name="profile.fullname"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel> Fullname</FormLabel>
-                    <FormControl>
-                      <Input placeholder="fullname" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
                 name="role"
                 render={({ field }) => (
                   <FormItem>
@@ -146,71 +113,6 @@ const UpdateFormUsers = ({ id }: any) => {
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name="profile.address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel> Address</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Address" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="profile.gender"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel> Gender</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="MALE">Male</SelectItem>
-                        <SelectItem value="FEMALE">Female</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="profile.image"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Image</FormLabel>
-                    <FormControl>
-                      <Input type="file" placeholder="Image" {...imageRef} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="profile.phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel> Phone Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Phone Number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-         
             </CardContent>
             <CardFooter>
               <Button type="submit">Save changes</Button>
