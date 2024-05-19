@@ -138,21 +138,6 @@ export const userColumn: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorFn: row => row.profile.image,
-    id: "profile.image",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-        Image
-        <ChevronsUpDown className="ml-2 h-4 w-4" />
-      </Button>
-    ),
-    cell: ({ row }) => (
-      <div className="uppercase">{row.getValue("profile.image")}</div>
-    ),
-  },
-  {
     accessorFn: row => row.profile.createdAt,
     id: "profile.createdAt",
     header: ({ column }) => (
