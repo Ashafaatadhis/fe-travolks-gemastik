@@ -51,7 +51,7 @@ const UpdateFormCategory = ({ slug }: any) => {
     dataProtected: `categories/${slug}`,
     backUrl: "/dashboard/categories",
   });
-
+  
   const onSubmit = async (data: FieldValues) => {
     mutationUpdateCategory.mutate(data);
   };
