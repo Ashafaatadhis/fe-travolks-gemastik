@@ -77,6 +77,8 @@ const UpdateFormUsers = ({ id }: any) => {
     form.append("profile.address", data.profile.address);
     form.append("profile.phoneNumber", data.profile.phoneNumber);
     form.append("profile.gender", data.profile.gender);
+    form.append("profile.createdAt", data.profile.createdAt);
+    form.append("profile.updatedAt", data.profile.updatedAt);
 
     if (data.profile.image[0] !== undefined) {
       form.append("profile.image", data.profile.image[0]);
@@ -211,6 +213,8 @@ const UpdateFormUsers = ({ id }: any) => {
                   </FormItem>
                 )}
               />
+              
+         
             </CardContent>
             <CardFooter>
               <Button type="submit">Save changes</Button>
