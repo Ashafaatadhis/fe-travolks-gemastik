@@ -18,9 +18,9 @@ const page = () => {
         <Navbar />
         <Hero />
         <Partner />
-        <Destination/>
-        <Tourist/>
-        <Reservation/>
+        <Destination />
+        <Tourist />
+        <Reservation />
         <Testimonial />
         <QuestionsSection />
         <Persuation />
