@@ -41,7 +41,7 @@ const UpdateFormUsers = ({ id }: any) => {
     queryKey: ["usersData"],
     dataProtected: `users/${id}`,
   });
-
+  
   const preLoadValues = {
     id: userData?.data.id,
     email: userData?.data.email,
@@ -50,7 +50,7 @@ const UpdateFormUsers = ({ id }: any) => {
 
   const form = useForm<z.infer<typeof usersSchema>>({
     resolver: zodResolver(usersSchema),
-    defaultValues: preLoadValues || [],
+    values: preLoadValues || [],
   });
 
   const mutationUpdateCategory = useUpdateData({
@@ -88,7 +88,6 @@ const UpdateFormUsers = ({ id }: any) => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="role"

@@ -39,7 +39,7 @@ import { LoaderCircleIcon } from "lucide-react";
 const UpdateFormProfileUser = (id: any) => {
   const { data: userData, isLoading } = useFetchData({
     queryKey: ["usersData"],
-    dataProtected: `users/${id}`,
+    dataProtected: `profile/users/${id}`,
   });
 
   const preLoadValues = {
@@ -57,26 +57,25 @@ const UpdateFormProfileUser = (id: any) => {
     values: preLoadValues || [],
   });
 
-  console.log(preLoadValues)
 
   const mutationUpdateProfile = useUpdateData({
     queryKey: "usersData",
-    dataProtected: `users/${id}`,
+    dataProtected: `profile/users/${id}`,
     backUrl: "/dashboard/users",
   });
+  
   const imageRef = form.register("image");
+
   const onSubmit = async (data: FieldValues) => {
     const form = new FormData();
-    form.append("email", data.email);
-    form.append("role", data.role);
-    form.append("fullname", data.profile.fullname);
-    form.append("address", data.profile.address);
-    form.append("phoneNumber", data.profile.phoneNumber);
-    form.append("gender", data.profile.gender);
-    if (data.profile.image[0] !== undefined) {
-      form.append("profile.image", data.profile.image[0]);
+    form.append("fullname", data.fullname);
+    form.append("address", data.address);
+    form.append("phoneNumber", data.phoneNumber);
+    form.append("gender", data.gender);
+    if (data.image[0] !== undefined) {
+      form.append("image", data.image[0]);
     }
-    mutationUpdateProfile.mutate(data);
+    mutationUpdateProfile.mutate(form);
   };
 
   return (

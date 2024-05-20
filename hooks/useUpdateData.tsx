@@ -43,7 +43,6 @@ export const useUpdateData = ({
     },
     onError: (error: any, variables, context) => {
       console.log(error);
-
       toast.error(`${error.response.data.message}`);
     },
     onSuccess: (data, variables, context) => {
