@@ -86,6 +86,7 @@ const UpdateFormProfileSettings = () => {
       form.append("image", data.image[0]);
     }
 
+    console.log(data.profile.fullname)
     mutationUpdateProfile.mutate(form);
   };
 
