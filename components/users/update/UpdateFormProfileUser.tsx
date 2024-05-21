@@ -39,28 +39,28 @@ import { LoaderCircleIcon } from "lucide-react";
 const UpdateFormProfileUser = (id: any) => {
   const { data: userData, isLoading } = useFetchData({
     queryKey: ["usersData"],
-    dataProtected: `profile/users/${id}`,
+    dataProtected: `profile/user/${id}`,
   });
 
   const preLoadValues = {
-    id: userData?.data.id,
     gender: userData?.data.profile.gender,
     fullname: userData?.data.profile.fullname,
     address: userData?.data.profile.address,
     phoneNumber: userData?.data.profile.phoneNumber,
     image: userData?.data.profile.image,
-    userId: userData?.data.profile.userId,
   };
+
+  console.log(preLoadValues)
 
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
-    values: preLoadValues || [],
+    defaultValues: preLoadValues || [],
   });
 
 
   const mutationUpdateProfile = useUpdateData({
     queryKey: "usersData",
-    dataProtected: `profile/users/${id}`,
+    dataProtected: `profile/user/${id}`,
     backUrl: "/dashboard/users",
   });
   
@@ -75,9 +75,13 @@ const UpdateFormProfileUser = (id: any) => {
     if (data.image[0] !== undefined) {
       form.append("image", data.image[0]);
     }
-    mutationUpdateProfile.mutate(form);
+
+    console.log(form)
+    console.log(data)
+    mutationUpdateProfile.mutate(data);
   };
 
+  
   return (
     <div className="mt-6">
     

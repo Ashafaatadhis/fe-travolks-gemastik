@@ -9,6 +9,7 @@ import {
   ChevronUp,
   TrashIcon,
   UserIcon,
+  LoaderCircleIcon,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -40,17 +41,20 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import React from "react";
+import { useFetchData } from "@/hooks/useFetchData";
+import axiosInstance from "@/helper/axiosInstance";
+import { useSearchParams } from "next/navigation";
 
 const Navbar = () => {
-  const ujiCoba = [
-    "Gunung",
-    "Kuliner",
-    "Outbond",
-    "Sejarah",
-    "Edukasi",
-    "Romasntis",
-    "Alarm",
-  ];
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || "1";
+  const count = searchParams.get("count") || "15";
+  const limit = typeof count === "string" ? parseInt(count) : 15;
+
+  const { data, isLoading, isSuccess, refetch, isRefetching } = useFetchData({
+    queryKey: ["categoriesData", page],
+    dataProtected: `categories?count=${count}&page=${page}`,
+  });
 
   return (
     <>
@@ -190,17 +194,19 @@ const Navbar = () => {
       </Sheet>
       <div className="flex justify-between items-center">
         <div className="flex flex-wrap min-w-0 ">
-          {ujiCoba.map((list) => {
+          {data?.data?.categories?.map((category: { name: string, slug:string, id: string } ) => {
+            const { name, slug, id } = category;
             return (
               <>
-                <NavigationMenu>
-                  <NavigationMenuList>
+                <NavigationMenu key={id}>
+                  <NavigationMenuList >
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className="text-xs">
-                        {list}
-                      </NavigationMenuTrigger>
+                      <NavigationMenuTrigger>{name}</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <NavigationMenuLink>*Content*</NavigationMenuLink>
+                        <NavigationMenuLink
+                          href={`/places-by-category/${slug}`}>
+                          {slug}
+                        </NavigationMenuLink>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   </NavigationMenuList>
