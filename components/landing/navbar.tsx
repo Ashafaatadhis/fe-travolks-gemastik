@@ -56,6 +56,17 @@ const Navbar = () => {
     dataProtected: `categories?count=${count}&page=${page}`,
   });
 
+  const list = [
+    "romantis",
+    "sejarah",
+    "kesehatan",
+    "pendidikan",
+    "pendidikan",
+    "pendidikan",
+    "pendidikan",
+    "pendidikan",
+  ];
+
   return (
     <>
       <Sheet>
@@ -194,20 +205,32 @@ const Navbar = () => {
       </Sheet>
       <div className="flex justify-between items-center">
         <div className="flex flex-wrap min-w-0 ">
-          {data?.data?.categories?.map((category: { name: string, slug:string, id: string } ) => {
-            const { name, slug, id } = category;
+          {list.map((item, index) => {
             return (
               <>
-                <NavigationMenu key={id}>
-                  <NavigationMenuList >
+                <NavigationMenu key={index}>
+                  <NavigationMenuList>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger>{name}</NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <NavigationMenuLink
-                          href={`/places-by-category/${slug}`}>
-                          {slug}
-                        </NavigationMenuLink>
-                      </NavigationMenuContent>
+                      <NavigationMenuTrigger>{item}</NavigationMenuTrigger>
+                      {data?.data?.categories?.map(
+                        (category: {
+                          name: string;
+                          slug: string;
+                          id: string;
+                        }) => {
+                          const { name, slug, id } = category;
+                          return (
+                            <>
+                              <NavigationMenuContent key={id}>
+                                <NavigationMenuLink
+                                  href={`/places-by-category/${slug}`}>
+                                  {name}
+                                </NavigationMenuLink>
+                              </NavigationMenuContent>
+                            </>
+                          );
+                        }
+                      )}
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
