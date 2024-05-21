@@ -12,6 +12,7 @@ const CategoriesDataTable = () => {
   const page = searchParams.get("page") || "1";
   const count = searchParams.get("count") || "15";
   const limit = typeof count === "string" ? parseInt(count) : 15;
+  
 
   const { data, isLoading, isSuccess, refetch, isRefetching } = useFetchData({
     queryKey: ["categoriesData", page],
