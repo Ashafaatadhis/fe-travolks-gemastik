@@ -36,7 +36,7 @@ import { profileSchema } from "@/schema/schema";
 import { Textarea } from "@/components/ui/textarea";
 import { LoaderCircleIcon } from "lucide-react";
 
-const UpdateFormProfileUser = (id: any) => {
+const UpdateFormProfileUser = ({id}: any) => {
   const { data: userData, isLoading } = useFetchData({
     queryKey: ["usersData"],
     dataProtected: `profile/user/${id}`,

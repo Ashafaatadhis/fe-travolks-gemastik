@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import FormDeleteUser from "@/components/users/delete/DeleteFormUser";
 import UpdateFormProfileUser from "@/components/users/update/UpdateFormProfileUser";
 import UpdateFormUsers from "@/components/users/update/UpdateFormUsers";
 import React from "react";
@@ -32,6 +33,7 @@ const page = ({ params }: any) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+      <FormDeleteUser id={params.id} />
      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
      <UpdateFormUsers id={params.id} />
       <UpdateFormProfileUser id={params.id} />
