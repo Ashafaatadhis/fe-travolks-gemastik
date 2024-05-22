@@ -1,7 +1,7 @@
 "use client";
 import { useFetchData } from '@/hooks/useFetchData';
 import Image from 'next/image';
-import { Image as LucideImage } from 'lucide-react';
+import { Divide, LoaderCircleIcon, Image as LucideImage } from 'lucide-react';
 
 interface TourGuideProfile {
   id: string;
@@ -51,6 +51,7 @@ const PlacesPage = ({ slug }: { slug: string }) => {
 
   return (
     <div >
+      {(isLoading || isRefetching) && <div className='flex items-center gap-x-2'><LoaderCircleIcon className='animate-spin w-5 h-5'/>Loading...</div>}
       {isSuccess && !isRefetching && (
         <>
           <div>
@@ -60,7 +61,8 @@ const PlacesPage = ({ slug }: { slug: string }) => {
                 <p>{place.name}</p>
                 <p>{place.description}</p>
                 <p>{place.slug}</p>
-              {place.images.length > 0 ? (
+             <div className='flex'>
+             {place.images.length > 0 ? (
                 <Image
                   src={place.images[0]}
                   alt="image"
@@ -78,6 +80,7 @@ const PlacesPage = ({ slug }: { slug: string }) => {
               ) : (
                   <div>No Categories</div>
                 )}
+             </div>
 
                 <p>{place.address}</p>
               </div>
