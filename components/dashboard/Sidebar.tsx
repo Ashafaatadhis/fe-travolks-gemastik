@@ -5,7 +5,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
-import { Blocks, Home, Package2, Settings, PersonStanding, TreePalm } from "lucide-react";
+import { Blocks, Home, Package2, Settings, PersonStanding, MountainSnow } from "lucide-react";
 import React from "react";
 
 const Sidebar = () => {
@@ -65,15 +65,15 @@ const Sidebar = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/dashboard/place"
+                href="/dashboard/places"
                 className="flex h-9 w-9 items-center bg-accent justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8 bg-custom-Paper-White"
               >
-                <TreePalm className="h-5 w-5" />
+                <MountainSnow className="h-5 w-5" />
                 <span className="sr-only">Places</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right" className="text-custom-Strong-Iris">
-              Places
+            Places
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

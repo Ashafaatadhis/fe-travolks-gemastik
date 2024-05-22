@@ -57,14 +57,14 @@ const Navbar = () => {
   });
 
   const list = [
-    "romantis",
-    "sejarah",
-    "kesehatan",
-    "pendidikan",
-    "pendidikan",
-    "pendidikan",
-    "pendidikan",
-    "pendidikan",
+    "Gunung",
+    "Pantai",
+    "Kuliner",
+    "Outbond",
+    "Sejarah",
+    "Edukasi",
+    "Romantis",
+    "Alam"
   ];
 
   return (
@@ -211,7 +211,7 @@ const Navbar = () => {
                 <NavigationMenu key={index}>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger>{item}</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className="text-custom-Bright-Manatee/70">{item}</NavigationMenuTrigger>
                       {data?.data?.categories?.map(
                         (category: {
                           name: string;
