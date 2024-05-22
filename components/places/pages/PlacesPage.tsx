@@ -78,7 +78,7 @@ const PlacesPage = ({ slug }: { slug: string }) => {
               {place.categories > 0 ? (
                 <p>{place.categories[0]}</p>
               ) : (
-                  <div>No Categories</div>
+                  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati quidem a dolores ullam eius dolore aperiam ducimus. Quam dolorum vitae omnis assumenda ipsum totam! Aut, maxime? Exercitationem quam corrupti quisquam!</div>
                 )}
              </div>
 

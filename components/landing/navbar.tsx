@@ -212,6 +212,7 @@ const Navbar = () => {
                   <NavigationMenuList>
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className="text-custom-Bright-Manatee/70">{item}</NavigationMenuTrigger>
+                      <NavigationMenuContent className="grid w-[50px] gap-3 p-2 md:w-[150px] md:grid-cols-1 lg:w-[250px]">
                       {data?.data?.categories?.map(
                         (category: {
                           name: string;
@@ -221,16 +222,20 @@ const Navbar = () => {
                           const { name, slug, id } = category;
                           return (
                             <>
-                              <NavigationMenuContent key={id}>
-                                <NavigationMenuLink
-                                  href={`/places-by-category/${slug}`}>
+                              {isLoading || isRefetching &&
+                                <LoaderCircleIcon className="animate-spin w-5 h-5" />}
+                                {isSuccess && !isRefetching && (
+                                  <NavigationMenuLink key={id}
+                                  href={`/places-by-category/${slug}`} className="hover:underline">
                                   {name}
                                 </NavigationMenuLink>
-                              </NavigationMenuContent>
+                                )}
+                                
                             </>
                           );
                         }
                       )}
+                      </NavigationMenuContent>
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
