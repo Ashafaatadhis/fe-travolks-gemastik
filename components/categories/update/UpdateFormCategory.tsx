@@ -40,6 +40,7 @@ const UpdateFormCategory = ({ slug }: any) => {
     name: categoryData?.data.name,
     slug: categoryData?.data.slug,
   };
+console.log(preLoadValues);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

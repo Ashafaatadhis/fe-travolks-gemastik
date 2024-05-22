@@ -40,8 +40,10 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import React from "react";
+import { useFetchData } from "@/hooks/useFetchData";
 
 const Navbar = () => {
+
   const ujiCoba = [
     "Gunung",
     "Kuliner",
