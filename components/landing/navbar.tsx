@@ -9,6 +9,7 @@ import {
   ChevronUp,
   TrashIcon,
   UserIcon,
+  LoaderCircleIcon,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -41,17 +42,29 @@ import {
 
 import React from "react";
 import { useFetchData } from "@/hooks/useFetchData";
+import axiosInstance from "@/helper/axiosInstance";
+import { useSearchParams } from "next/navigation";
 
 const Navbar = () => {
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || "1";
+  const count = searchParams.get("count") || "15";
+  const limit = typeof count === "string" ? parseInt(count) : 15;
 
-  const ujiCoba = [
-    "Gunung",
-    "Kuliner",
-    "Outbond",
-    "Sejarah",
-    "Edukasi",
-    "Romasntis",
-    "Alarm",
+  const { data, isLoading, isSuccess, refetch, isRefetching } = useFetchData({
+    queryKey: ["categoriesData", page],
+    dataProtected: `categories?count=${count}&page=${page}`,
+  });
+
+  const list = [
+    "romantis",
+    "sejarah",
+    "kesehatan",
+    "pendidikan",
+    "pendidikan",
+    "pendidikan",
+    "pendidikan",
+    "pendidikan",
   ];
 
   return (
@@ -192,18 +205,32 @@ const Navbar = () => {
       </Sheet>
       <div className="flex justify-between items-center">
         <div className="flex flex-wrap min-w-0 ">
-          {ujiCoba.map((list) => {
+          {list.map((item, index) => {
             return (
               <>
-                <NavigationMenu>
+                <NavigationMenu key={index}>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className="text-xs">
-                        {list}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <NavigationMenuLink>*Content*</NavigationMenuLink>
-                      </NavigationMenuContent>
+                      <NavigationMenuTrigger>{item}</NavigationMenuTrigger>
+                      {data?.data?.categories?.map(
+                        (category: {
+                          name: string;
+                          slug: string;
+                          id: string;
+                        }) => {
+                          const { name, slug, id } = category;
+                          return (
+                            <>
+                              <NavigationMenuContent key={id}>
+                                <NavigationMenuLink
+                                  href={`/places-by-category/${slug}`}>
+                                  {name}
+                                </NavigationMenuLink>
+                              </NavigationMenuContent>
+                            </>
+                          );
+                        }
+                      )}
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>

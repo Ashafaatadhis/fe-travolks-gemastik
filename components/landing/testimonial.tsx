@@ -32,7 +32,7 @@ export default function Testimonial() {
           const { img, review, reviewer, job } = data;
           return (
             <>
-              <Card key={review}>
+              <Card key={reviewer}>
                 <CardHeader>
                   <CardTitle>
                     <div>

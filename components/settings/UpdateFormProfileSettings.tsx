@@ -50,7 +50,6 @@ const formSchema = z.object({
 
 const UpdateFormProfileSettings = () => {
   const userDataFromCookie = retreiveUserDataFromCookie();
-
   const { data: userProfileData, isLoading } = useFetchData({
     queryKey: ["userProfileData"],
     dataProtected: `profile/user/${userDataFromCookie.sub}`,
@@ -86,7 +85,6 @@ const UpdateFormProfileSettings = () => {
       form.append("image", data.image[0]);
     }
 
-    console.log(data.profile.fullname)
     mutationUpdateProfile.mutate(form);
   };
 
