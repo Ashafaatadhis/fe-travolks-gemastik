@@ -50,39 +50,58 @@ const PlacesPage = ({ slug }: { slug: string }) => {
   console.log(placesData?.places[0].images);
 
   return (
-    <div >
-      {(isLoading || isRefetching) && <div className='flex items-center gap-x-2'><LoaderCircleIcon className='animate-spin w-5 h-5'/>Loading...</div>}
+    <div>
+      {(isLoading || isRefetching) && (
+        <div className="flex items-center gap-x-2">
+          <LoaderCircleIcon className="animate-spin w-5 h-5" />
+          Loading...
+        </div>
+      )}
       {isSuccess && !isRefetching && (
         <>
-          <div>
-
+          <div className="m-auto md:flex gap-3">
             {placesData?.places.map((place) => (
-              <div key={place.id}>
-                <p>{place.name}</p>
-                <p>{place.description}</p>
-                <p>{place.slug}</p>
-             <div className='flex'>
-             {place.images.length > 0 ? (
-                <Image
-                  src={place.images[0]}
-                  alt="image"
-                  width={200}
-                  height={200}
-                />
-              ) :(
-                <div className='w-96 bg-custom-Bright-Manatee/15 h-40 grid place-items-center'>
-               <LucideImage className='w-20 h-20 text-custom-Bright-Manatee/10'/>
+              <div
+                className="border p-3 rounded-lg items-center mt-5 bg-custom-Grams-Hair drop-shadow-md"
+                key={place.id}
+              >
+                <div className="">
+                  {place.images.length > 0 ? (
+                    <Image
+                      src={place.images[0]}
+                      alt="image"
+                      width={200}
+                      height={200}
+                      className="max-w-screen-md h-44 md:w-96 rounded-lg md:h-40 m-auto"
+                    />
+                  ) : (
+                    <div className="relative text-center">
+                      <div className="max-w-screen-md h-44 md:w-96 rounded-lg md:h-40 m-auto bg-custom-Bright-Manatee/15 grid place-items-center">
+                        <LucideImage className="w-20 h-20 text-custom-Bright-Manatee/10" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-              
-              {place.categories > 0 ? (
-                <p>{place.categories[0]}</p>
-              ) : (
-                  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati quidem a dolores ullam eius dolore aperiam ducimus. Quam dolorum vitae omnis assumenda ipsum totam! Aut, maxime? Exercitationem quam corrupti quisquam!</div>
-                )}
-             </div>
 
-                <p>{place.address}</p>
+                <div className='text-right'>
+                  {place.categories > 0 ? (
+                    <p>{place.categories[0]}</p>
+                  ) : (
+                    <p>
+                      No Categories
+                    </p>
+                  )}
+                </div>
+                <div className="description mt-3">
+                  <h1 className="text-xl font-bold">{place.name}</h1>
+                  <p className="text-base">{place.description}</p>
+                  <p className="text-sm text-custom-Asphalt-Blue">
+                    {place.slug}
+                  </p>
+                  <p className="text-sm text-custom-Asphalt-Blue">
+                    {place.address}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
